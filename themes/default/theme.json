@@ -1,0 +1,13 @@
+{
+    "name": "Default Theme",
+    "slug": "default",
+    "version": "1.0.0",
+    "author": "28 Folio",
+    "description": "The default system theme.",
+    "supported_features": [
+        "blog",
+        "portfolio",
+        "resume",
+        "contact"
+    ]
+}
