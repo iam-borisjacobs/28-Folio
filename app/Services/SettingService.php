@@ -39,6 +39,8 @@ class SettingService
 
         // Clear cache for this key
         Cache::forget("setting.{$key}");
+        // Clear global settings cache
+        Cache::forget('settings');
 
         return $setting;
     }
@@ -52,6 +54,7 @@ class SettingService
     public function forget(string $key)
     {
         Cache::forget("setting.{$key}");
+        Cache::forget('settings');
         return Setting::where('key', $key)->delete();
     }
     

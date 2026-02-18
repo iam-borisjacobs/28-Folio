@@ -24,6 +24,11 @@ class BrandingSettingsController extends Controller
 
     public function update(Request $request)
     {
+        // Manual Security Check (Temporary fix for Middleware issue)
+        if (! $request->user() || ! $request->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'logo_url' => 'nullable|string',
             'favicon_url' => 'nullable|string',

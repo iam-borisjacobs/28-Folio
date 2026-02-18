@@ -1,5 +1,13 @@
 <?php
 
+Route::any('/debug-test', function () {
+    dd('DEBUG ROUTE HIT', [
+        'Method' => request()->method(),
+        'Url' => request()->url(),
+        'Input' => request()->all(),
+    ]);
+})->name('debug.post');
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\ContactController;
@@ -103,14 +111,16 @@ Route::middleware(['auth', 'verified', 'is_admin'])->prefix('admin')->name('admi
 
         Route::resource('languages', \App\Http\Controllers\Admin\Settings\LanguageSettingsController::class);
 
+        // General Settings
         Route::get('/general', [\App\Http\Controllers\Admin\Settings\GeneralSettingsController::class, 'edit'])->name('general');
-        Route::post('/general', [\App\Http\Controllers\Admin\Settings\GeneralSettingsController::class, 'update']);
 
+        // Branding Settings
         Route::get('/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'edit'])->name('branding');
-        Route::post('/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'update']);
+        // Route::post('/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'update']);
 
+        // SEO Settings
         Route::get('/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'edit'])->name('seo');
-        Route::post('/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'update']);
+        // Route::post('/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'update']);
 
         Route::get('/scripts', [\App\Http\Controllers\Admin\Settings\ScriptSettingsController::class, 'edit'])->name('scripts');
         Route::post('/scripts', [\App\Http\Controllers\Admin\Settings\ScriptSettingsController::class, 'update']);
@@ -146,6 +156,14 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/robots.txt', [RobotsController::class, 'index'])->name('robots');
+Route::get('/lang/{locale}', [\App\Http\Controllers\Public\LanguageController::class, 'switch'])->name('lang.switch');
 
 // Auth Routes
 require __DIR__.'/auth.php';
+
+// General Settings Update (Manually secured in controller to bypass middleware issues)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/admin/settings/general', [\App\Http\Controllers\Admin\Settings\GeneralSettingsController::class, 'update'])->name('admin.settings.general.update');
+    Route::post('/admin/settings/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'update'])->name('admin.settings.seo.update');
+    Route::post('/admin/settings/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'update'])->name('admin.settings.branding.update');
+});

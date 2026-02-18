@@ -15,20 +15,22 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->segment(1);
+        if (session()->has('locale')) {
+            $locale = session('locale');
+        } else {
+            $locale = config('app.locale');
+        }
+
         $activeLanguages = \App\Models\Language::where('is_active', true)->pluck('code')->toArray();
-        $defaultLanguage = \App\Models\Language::where('is_default', true)->value('code') ?? 'en';
 
         if (in_array($locale, $activeLanguages)) {
             app()->setLocale($locale);
-            // Share current locale with all views
-            view()->share('currentLocale', $locale);
         } else {
-             // If URL doesn't have a valid locale prefix, fall back to default
-             // Optionally, you could redirect to /{default_locale}/...
-             app()->setLocale($defaultLanguage);
-             view()->share('currentLocale', $defaultLanguage);
+            app()->setLocale(config('app.fallback_locale'));
         }
+        
+        // Share current locale with all views
+        view()->share('currentLocale', app()->getLocale());
 
         return $next($request);
     }

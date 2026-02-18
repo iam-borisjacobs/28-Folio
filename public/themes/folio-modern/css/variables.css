@@ -1,0 +1,49 @@
+:root {
+    /* Color Palette - Dark Glass Theme */
+    /* Backgrounds as Gradients */
+    --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.07);
+    --bg-header: rgba(15, 23, 42, 0.7);
+
+    /* Text Colors */
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --text-accent: #22d3ee; /* Cyan/Blue accent for glass theme */
+
+    /* Neon Accents */
+    --accent-primary: #38bdf8; /* Sky Blue Neon */
+    --accent-secondary: #a855f7; /* Purple Neon */
+    --accent-green: #22c55e; /* Exact Green from user */
+    --accent-pink: #ec4899; /* Exact Pink from user */
+
+    /* Glassmorphism Effects */
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    --backdrop-blur: blur(12px);
+
+    /* Typography */
+    --font-main: "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+    /* Spacing & Layout */
+    --container-width: 1200px;
+    --header-height: 80px;
+    --border-radius: 16px; /* Slightly more rounded for glass feel */
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Icons */
+    --icon-size: 24px;
+}
+
+[data-theme="light"] {
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f3f5;
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --glass-border: rgba(0, 0, 0, 0.05);
+    --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

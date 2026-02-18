@@ -24,6 +24,11 @@ class SeoSettingsController extends Controller
 
     public function update(Request $request)
     {
+        // Manual Security Check (Temporary fix for Middleware issue)
+        if (! $request->user() || ! $request->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'meta_title_format' => 'required|string|max:255',
             'meta_description_default' => 'nullable|string|max:500',
@@ -32,6 +37,8 @@ class SeoSettingsController extends Controller
             'social_instagram' => 'nullable|string|max:255',
             'social_linkedin' => 'nullable|string|max:255',
             'social_github' => 'nullable|string|max:255',
+            'social_facebook' => 'nullable|string|max:255',
+            'social_youtube' => 'nullable|string|max:255',
         ]);
 
         foreach ($validated as $key => $value) {

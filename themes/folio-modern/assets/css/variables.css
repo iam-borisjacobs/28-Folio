@@ -1,131 +1,49 @@
 :root {
-    /* Colors */
-    --bg-body: #10101a;
-    --bg-card: #161623;
-    --bg-card-hover: #1c1c2e;
+    /* Color Palette - Dark Glass Theme */
+    /* Backgrounds as Gradients */
+    --bg-body: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.07);
+    --bg-header: rgba(15, 23, 42, 0.7);
 
+    /* Text Colors */
     --text-main: #ffffff;
-    --text-muted: #9494a8;
+    --text-muted: #94a3b8;
+    --text-accent: #22d3ee; /* Cyan/Blue accent for glass theme */
 
-    --primary: #ff3c3c; /* Red accent from image */
-    --primary-hover: #e03535;
+    /* Neon Accents */
+    --accent-primary: #38bdf8; /* Sky Blue Neon */
+    --accent-secondary: #a855f7; /* Purple Neon */
+    --accent-green: #4ade80; /* Neon Green from design */
+    --accent-pink: #ff477e; /* Neon Pink from design */
 
-    --border-color: #252538;
+    /* Glassmorphism Effects */
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    --backdrop-blur: blur(12px);
 
     /* Typography */
-    --font-heading: "Inter", sans-serif;
-    --font-body: "Inter", sans-serif;
+    --font-main: "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
-    /* Spacing */
+    /* Spacing & Layout */
     --container-width: 1200px;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 8rem;
+    --header-height: 80px;
+    --border-radius: 16px; /* Slightly more rounded for glass feel */
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-full: 9999px;
+    /* Icons */
+    --icon-size: 24px;
 }
 
-body {
-    background-color: var(--bg-body);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-heading);
-    margin: 0;
-    line-height: 1.2;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-/* Utilities */
-.container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 var(--spacing-sm);
-}
-
-.text-primary {
-    color: var(--primary);
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: var(--primary);
-    color: white;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background-color: var(--primary-hover);
-}
-
-.btn-outline {
-    background-color: transparent;
-    border: 1px solid var(--border-color);
-}
-
-.btn-outline:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.section {
-    padding: var(--spacing-xl) 0;
-}
-
-.grid {
-    display: grid;
-    gap: var(--spacing-md);
-}
-
-.grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-.grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 768px) {
-    .grid-2,
-    .grid-3,
-    .grid-4 {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        padding: var(--spacing-lg) 0;
-    }
+[data-theme="light"] {
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f3f5;
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --glass-border: rgba(0, 0, 0, 0.05);
+    --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }

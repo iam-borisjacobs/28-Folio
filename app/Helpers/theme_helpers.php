@@ -47,11 +47,7 @@ if (! function_exists('theme_view')) {
         // So we can just return view("active_theme::{$view}")
 
         if ($factory->exists("active_theme::{$view}")) {
-            echo "DEBUG: Found active theme view: active_theme::{$view} <br>";
-
             return $factory->make("active_theme::{$view}", $data, $mergeData);
-        } else {
-            echo "DEBUG: active_theme::{$view} DOES NOT EXIST <br>";
         }
 
         // Fallback to default theme-less view if needed, or explicitly fail?
@@ -64,8 +60,6 @@ if (! function_exists('theme_view')) {
         }
 
         // Last resort fallback to standard resource/views
-        echo "DEBUG: Falling back to standard view: $view <br>";
-
         return $factory->make($view, $data, $mergeData);
     }
 }

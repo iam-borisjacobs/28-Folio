@@ -4,5 +4,32 @@
     "version": "1.0.0",
     "author": "28 Folio",
     "description": "A premium, dark-mode personal portfolio theme with a focus on typography and professional branding.",
-    "preview_image": "preview.png"
+    "preview_image": "preview.png",
+    "supported_features": [
+        "widgets",
+        "menus",
+        "dark_mode"
+    ],
+    "settings": {
+        "hero_title_suffix": {
+            "label": "Hero Title Suffix",
+            "type": "text",
+            "default": "Full Stack Developer"
+        },
+        "contact_email": {
+            "label": "Contact Email",
+            "type": "email",
+            "default": "hello@james.dev"
+        },
+        "contact_address": {
+            "label": "Contact Address",
+            "type": "text",
+            "default": "San Francisco, CA"
+        },
+        "contact_phone": {
+            "label": "Contact Phone",
+            "type": "text",
+            "default": "+1 (555) 123-4567"
+        }
+    }
 }

@@ -1,16 +1,16 @@
-@extends('active_theme::layouts.app')
+@extends('active_theme::layouts.theme_layout')
 
 @section('content')
 <section class="section" style="padding-top: 120px;">
     <div class="container">
-        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-            <h1 style="font-size: 3.5rem; margin-bottom: 20px;">My Projects</h1>
-            <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
+        <div class="section-header text-center">
+            <h1 class="h1">My Projects</h1>
+            <p class="section-subtitle mx-auto">
                 Explore a collection of my recent work, showcasing my skills in web and app development.
             </p>
         </div>
 
-        <div class="grid grid-3">
+        <div class="grid grid-cols-2 gap-8" style="gap: 2rem;">
             @foreach($projects as $project)
             <div class="project-card">
                 <div class="project-image">
@@ -30,13 +30,13 @@
                         <h3 class="project-title">{{ $project->title }}</h3>
                     </a>
                     <p class="project-excerpt">{{ Str::limit($project->description, 100) }}</p>
-                    <a href="{{ route('projects.show', $project) }}" style="margin-top: auto; color: var(--primary); font-weight: 600;">View Details &rarr;</a>
+                    <a href="{{ route('projects.show', $project) }}" style="margin-top: auto; color: var(--accent-primary); font-weight: 600;">View Details &rarr;</a>
                 </div>
             </div>
             @endforeach
         </div>
 
-        <div style="margin-top: 60px;">
+        <div class="mt-8 flex justify-center">
             {{ $projects->links() }}
         </div>
     </div>

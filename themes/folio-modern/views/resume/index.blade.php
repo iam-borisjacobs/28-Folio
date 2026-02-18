@@ -1,43 +1,45 @@
-@extends('active_theme::layouts.app')
+@extends('active_theme::layouts.theme_layout')
 
 @section('content')
 <section class="section" style="padding-top: 120px;">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 60px;">
+        <div class="grid grid-cols-3 gap-8" style="grid-template-columns: 1fr 2fr; gap: 4rem;">
             <!-- Sidebar -->
-            <div style="position: sticky; top: 120px; align-self: start;">
-                 <h1 style="font-size: 3rem; margin-bottom: 20px; line-height: 1;">Resume</h1>
-                 <p style="color: var(--text-muted); margin-bottom: 40px;">
+            <aside style="position: sticky; top: 120px; align-self: start;">
+                 <h1 class="h1 mb-6">Resume</h1>
+                 <p class="text-muted mb-8 text-lg">
                      A comprehensive look at my professional experience, education, and skills.
                  </p>
                  
-                 <a href="#" class="btn btn-outline" style="width: 100%; margin-bottom: 20px;">Download PDF</a>
+                 <a href="{{ theme_asset('cv.pdf') }}" class="btn btn-primary w-100 mb-8" style="width: 100%; justify-content: center;">
+                    Download PDF
+                 </a>
                  
-                 <div style="margin-top: 40px;">
-                     <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Connect</h3>
-                     <ul style="list-style: none; padding: 0;">
-                         <li style="margin-bottom: 10px;"><a href="#" style="color: var(--text-muted); hover:var(--primary);">LinkedIn</a></li>
-                         <li style="margin-bottom: 10px;"><a href="#" style="color: var(--text-muted); hover:var(--primary);">GitHub</a></li>
-                         <li style="margin-bottom: 10px;"><a href="#" style="color: var(--text-muted); hover:var(--primary);">Twitter</a></li>
+                 <div class="card bg-card p-6">
+                     <h3 class="h3 mb-4">Connect</h3>
+                     <ul class="flex flex-col gap-2">
+                         <li><a href="#" class="text-muted hover:text-accent transition-colors flex items-center gap-2"><div class="service-icon" style="font-size: 1rem; margin-bottom: 0;">LinkedIn</div> LinkedIn</a></li>
+                         <li><a href="#" class="text-muted hover:text-accent transition-colors flex items-center gap-2"><div class="service-icon" style="font-size: 1rem; margin-bottom: 0;">GitHub</div> GitHub</a></li>
+                         <li><a href="#" class="text-muted hover:text-accent transition-colors flex items-center gap-2"><div class="service-icon" style="font-size: 1rem; margin-bottom: 0;">Twitter</div> Twitter</a></li>
                      </ul>
                  </div>
-            </div>
+            </aside>
 
             <!-- Content -->
             <div>
                 <!-- Experience -->
-                <div style="margin-bottom: 60px;">
-                    <h2 style="font-size: 2rem; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">Experience</h2>
+                <div class="mb-12">
+                    <h2 class="h2 mb-8 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.1);">Experience</h2>
                     
                     <div class="timeline">
-                        <!-- Placeholder items, in real app loop through $experiences -->
+                        <!-- Placeholder items -->
                         <div class="timeline-item">
                             <span class="timeline-marker"></span>
-                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px;">
-                                <h4 class="timeline-title" style="margin: 0;">Senior Full Stack Developer</h4>
-                                <span class="timeline-date" style="font-size: 0.85rem;">2022 - Present</span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="timeline-title">Senior Full Stack Developer</h4>
+                                <span class="timeline-date">2022 - Present</span>
                             </div>
-                            <p class="timeline-org" style="color: var(--primary); margin-bottom: 10px;">Tech Solutions Inc.</p>
+                            <p class="timeline-org mb-2">Tech Solutions Inc.</p>
                             <p class="timeline-desc">
                                 Spearheaded the migration of legacy systems to modern microservices architecture.
                                 Mentored junior developers and introduced automated testing pipelines.
@@ -46,55 +48,55 @@
 
                         <div class="timeline-item">
                             <span class="timeline-marker"></span>
-                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px;">
-                                <h4 class="timeline-title" style="margin: 0;">Web Developer</h4>
-                                <span class="timeline-date" style="font-size: 0.85rem;">2019 - 2022</span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="timeline-title">Web Developer</h4>
+                                <span class="timeline-date">2019 - 2022</span>
                             </div>
-                            <p class="timeline-org" style="color: var(--primary); margin-bottom: 10px;">Creative Agency</p>
+                            <p class="timeline-org mb-2">Creative Agency</p>
                             <p class="timeline-desc">
-                                Developed award-winning websites for high-profile clients. worked closely with designers to ensure pixel-perfect implementation.
+                                Developed award-winning websites for high-profile clients. Worked closely with designers to ensure pixel-perfect implementation.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Education -->
-                <div style="margin-bottom: 60px;">
-                    <h2 style="font-size: 2rem; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">Education</h2>
+                <div class="mb-12">
+                    <h2 class="h2 mb-8 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.1);">Education</h2>
                     
                     <div class="timeline">
                         <div class="timeline-item">
                             <span class="timeline-marker"></span>
-                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px;">
-                                <h4 class="timeline-title" style="margin: 0;">BS Computer Science</h4>
-                                <span class="timeline-date" style="font-size: 0.85rem;">2015 - 2019</span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h4 class="timeline-title">BS Computer Science</h4>
+                                <span class="timeline-date">2015 - 2019</span>
                             </div>
-                            <p class="timeline-org" style="color: var(--primary); margin-bottom: 10px;">University of Technology</p>
+                            <p class="timeline-org mb-2">University of Technology</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Skills -->
                 <div>
-                     <h2 style="font-size: 2rem; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">Skills</h2>
+                     <h2 class="h2 mb-8 pb-4" style="border-bottom: 1px solid rgba(255,255,255,0.1);">Skills</h2>
                      
-                     <div style="margin-bottom: 30px;">
-                         <h4 style="margin-bottom: 15px;">Frontend</h4>
-                         <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">Vue.js</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">Tailwind CSS</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">JavaScript (ES6+)</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">HTML5/CSS3</span>
+                     <div class="mb-8">
+                         <h4 class="h3 mb-4">Frontend</h4>
+                         <div class="flex flex-wrap gap-2">
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">Vue.js</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">Tailwind CSS</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">JavaScript (ES6+)</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">HTML5/CSS3</span>
                          </div>
                      </div>
 
-                     <div style="margin-bottom: 30px;">
-                         <h4 style="margin-bottom: 15px;">Backend</h4>
-                         <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">Laravel</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">PHP 8</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">MySQL</span>
-                             <span style="background: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">Redis</span>
+                     <div class="mb-8">
+                         <h4 class="h3 mb-4">Backend</h4>
+                         <div class="flex flex-wrap gap-2">
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">Laravel</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">PHP 8</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">MySQL</span>
+                             <span class="px-4 py-2 bg-card rounded border border-white/5">Redis</span>
                          </div>
                      </div>
                 </div>
