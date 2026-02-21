@@ -67,6 +67,23 @@ img {
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.h1 p {
+    display: inline;
+    margin: 0;
+}
+.hero-description p {
+    display: inline;
+    margin: 0;
+}
+
+.hero-highlight {
+    color: var(--accent-primary) !important;
+    font-weight: 700;
+    -webkit-text-fill-color: var(
+        --accent-primary
+    ) !important; /* Override parent gradient */
+    background: none !important;
+}
 .h2 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -211,7 +228,7 @@ img {
     color: var(--text-main);
     cursor: pointer;
     padding: 0.25rem;
-    display: flex;
+    display: none; /* Hidden on desktop, shown via media query on mobile */
     align-items: center;
     justify-content: center;
     transition: color var(--transition-fast);
@@ -326,7 +343,7 @@ img {
 
 /* Hero Section */
 .hero-section {
-    padding: 0 0 6rem; /* Removed top padding to attach to header */
+    padding: 0 0 7rem; /* Tightened gap with stats */
     min-height: 80vh;
     display: flex;
     align-items: center;
@@ -387,6 +404,84 @@ img {
     width: 100%;
     max-width: var(--container-width);
     margin: 0.5rem auto 0;
+}
+
+/* ===== STATS SECTION ===== */
+.stats-section {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 6rem;
+}
+
+.stats-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--container-width);
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 5rem 4rem;
+    margin: -7rem auto 0; /* -1rem top margin pulls it up over the hero padding, leaving a thin gap */
+    /* Subtle dot grid overlay */
+    background-image:
+        linear-gradient(var(--bg-card), var(--bg-card)),
+        radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size:
+        auto,
+        24px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.stat-icon {
+    color: var(--accent-green);
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.stat-number {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.stat-plus {
+    color: var(--accent-green);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 0.2rem;
+}
+
+.stat-highlight {
+    color: var(--accent-green);
+    font-weight: 500;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 70px;
+    background: var(--glass-border);
+    flex-shrink: 0;
+    margin: 0 2rem;
 }
 
 .hero-highlight {
@@ -812,4 +907,342 @@ textarea.form-control {
     border-radius: 50%;
     color: var(--accent-primary);
     flex-shrink: 0;
+}
+
+/* --- MOBILE HEADER & DRAWER REFACTOR --- */
+
+/* 1. Hide Desktop Nav on Mobile */
+@media (max-width: 900px) {
+    .header-center {
+        display: none !important;
+    }
+
+    .desktop-controls {
+        display: none !important;
+    }
+
+    .header-right {
+        gap: 1rem;
+    }
+
+    .hero-section {
+        padding: 0 0 2rem;
+        min-height: auto;
+    }
+
+    .hero-grid {
+        padding: 2rem 1rem;
+        width: 92%;
+        margin: 0 auto;
+        border-radius: 20px;
+    }
+
+    .stats-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+        /* Width and margin handled by 900px/480px media queries */
+        width: 92%;
+        margin: -2rem auto 0;
+        border-radius: 20px;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        /* Square Button Look */
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-main);
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent-primary);
+    }
+}
+
+/* 2. Mobile Drawer Styling */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0f172a; /* Dark Solid Background */
+    z-index: 2000;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+}
+
+.close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #fff;
+    border-color: #ef4444; /* Red for close */
+}
+
+/* Navigation Links */
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1; /* Push footer down */
+}
+
+.drawer-link {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.drawer-link .arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+}
+
+.drawer-link:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Footer Section */
+.drawer-footer {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.drawer-lang {
+    margin-bottom: 1.5rem;
+}
+
+.lang-btn-mobile {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.mobile-socials {
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.mobile-socials .social-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    /* --- LAYOUT --- */
+    .hero-grid {
+        display: flex !important;
+        flex-direction: column-reverse !important; /* Image on TOP */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding-top: 2rem !important; /* Less top padding since image is there */
+        padding-bottom: 4rem !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        gap: 2rem !important;
+        align-items: center !important; /* Center the image wrapper */
+        overflow-x: hidden !important;
+    }
+
+    .hero-image {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important; /* Center the hexagon */
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-content {
+        width: 100% !important;
+        text-align: left !important; /* Force Left Alignment */
+        align-items: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-grid * {
+        position: relative; /* Default reset */
+    }
+
+    /* RESTORE BADGE ABSOLUTE POSITIONING */
+    .profile-hex {
+        position: relative !important;
+        overflow: visible !important; /* Allow badge to go outside */
+        z-index: 5 !important;
+    }
+
+    /* Target the floating badge (div inside the hex) */
+    .profile-hex > div {
+        position: absolute !important;
+        bottom: -25px !important; /* Push it down a bit more */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        top: auto !important;
+        right: auto !important;
+        z-index: 10 !important;
+        width: 60px !important;
+        height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* --- TYPOGRAPHY (Bold & Chunky) --- */
+    .h1 {
+        font-size: 2.8rem !important; /* LARGE mobile font */
+        line-height: 1.1 !important; /* Tight stacking */
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: manual !important; /* Let it break naturally or via <br> */
+        letter-spacing: -0.03em !important;
+        margin-bottom: 1.5rem !important;
+        text-align: left !important;
+        width: 100% !important;
+    }
+
+    /* Pre-title alignment */
+    .hero-pre-title {
+        justify-content: flex-start !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1rem !important;
+        text-align: left !important;
+    }
+
+    .hero-description {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        padding: 0 !important; /* No extra padding, align with title */
+        max-width: 100% !important;
+        text-align: left !important;
+    }
+
+    /* --- ELEMENTS --- */
+    .profile-hex {
+        width: 250px !important; /* Slightly larger for impact */
+        height: 250px !important;
+        margin: 0 !important; /* Centered by parent flex */
+    }
+
+    .hero-icons {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow: hidden !important;
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 5%,
+            black 95%,
+            transparent
+        ) !important;
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 5%,
+            black 95%,
+            transparent
+        ) !important;
+    }
+
+    .hero-actions {
+        justify-content: flex-start !important; /* Left align button */
+        width: 100% !important;
+    }
+
+    /* SMALL SCREEN Scaling */
+    @media (max-width: 480px) {
+        .h1 {
+            font-size: 2.4rem !important;
+        }
+        .profile-hex {
+            width: 220px !important;
+            height: 220px !important;
+        }
+    }
+
+    /* Extra Small Screens - Aggressive Reduction */
+    @media (max-width: 380px) {
+        .h1 {
+            font-size: 2rem !important;
+        }
+        .profile-hex {
+            width: 200px !important;
+            height: 200px !important;
+        }
+    }
+}
+
+/* --- MICRO-INTERACTIONS --- */
+@keyframes blink-slow {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.cursor {
+    display: inline-block;
+    animation: blink-slow 5s step-end infinite;
+    color: var(--accent-primary);
+    font-weight: 1000;
+    margin-left: 2px;
 }

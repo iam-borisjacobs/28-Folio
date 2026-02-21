@@ -6,24 +6,17 @@
         <!-- Removed .container to allow hero-grid to match header width -->
         <div class="hero-grid">
             <div class="hero-content">
-                <div class="hero-pre-title font-mono text-pink">
-                    <span class="code-tag">&lt;span&gt;</span><span
-                        class="text-main">{{ setting('hero_subtitle', "Hey, I'm James") }}</span><span
+                <div class="hero-pre-title font-mono text-pink flex items-center justify-start gap-2">
+                    <span class="code-tag">&lt;span&gt;</span>{!! setting('hero_subtitle', "Hey, I'm James") !!}<span
                         class="code-tag">&lt;/span&gt;</span>
                 </div>
                 <h1 class="h1">
-                    {!! setting(
-                        'hero_title',
-                        'Senior <span class="hero-brackets">{</span><span class="hero-highlight">Full Stack</span><span class="hero-brackets">}</span><br>Web & App <br>developer<span class="cursor">_</span>',
-                    ) !!}
+                    {!! setting('hero_title') !!}<span class="cursor" style="animation-duration: 2.5s !important;">_</span>
                 </h1>
                 <p class="hero-description">
-                    <span class="code-tag">&lt;p&gt;</span>
-                    {!! setting(
-                        'hero_description',
-                        'With expertise in cutting-edge technologies such as <span class="text-pink">NodeJS</span>, <span class="text-pink">React</span>, <span class="text-pink">Angular</span>, and <span class="text-pink">Laravel</span>... I deliver web solutions that are both innovative and robust.',
-                    ) !!}
-                    <span class="code-tag">&lt;/p&gt;</span>
+                    <span class="code-tag">&lt;p&gt;</span>{!! strip_tags(setting('hero_description'), '<span><strong><em><b><i>') !!}<span class="cursor"
+                        style="animation-duration: 2.7s !important;">|</span><span class="code-tag">&lt;/p&gt;</span>
+
                 </p>
 
                 <div class="hero-icons mb-8" style="margin-bottom: 2.5rem;">
@@ -48,8 +41,7 @@
                 </div>
 
                 <div class="hero-actions">
-                    <a href="{{ theme_asset('cv.pdf') }}" class="btn text-green font-mono"
-                        style="padding-left: 0; background: transparent; border: none; box-shadow: none;">
+                    <a href="{{ theme_asset('cv.pdf') }}" class="btn btn-cv font-mono">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="margin-right: 0.5rem;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -75,6 +67,71 @@
                         &lt;/&gt;
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <!-- Years Experience -->
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                    </svg>
+                </div>
+                <div class="stat-number">12<span class="stat-plus">+</span></div>
+                <div class="stat-label">Years <span class="stat-highlight">Experience</span></div>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <!-- Projects Completed -->
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        stroke-width="1.8">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                </div>
+                <div class="stat-number">250<span class="stat-plus">+</span></div>
+                <div class="stat-label">Projects <span class="stat-highlight">Completed</span></div>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <!-- Satisfied Clients -->
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" />
+                    </svg>
+                </div>
+                <div class="stat-number">680<span class="stat-plus">+</span></div>
+                <div class="stat-label">Satisfied <span class="stat-highlight">Clients</span></div>
+            </div>
+
+            <div class="stat-divider"></div>
+
+            <!-- Awards Won -->
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        stroke-width="1.8">
+                        <circle cx="12" cy="8" r="6" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+                    </svg>
+                </div>
+                <div class="stat-number">18<span class="stat-plus">+</span></div>
+                <div class="stat-label">Awards <span class="stat-highlight">Winner</span></div>
             </div>
         </div>
     </section>

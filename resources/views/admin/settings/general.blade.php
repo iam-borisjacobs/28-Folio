@@ -73,9 +73,9 @@
                         <!-- Hero Title -->
                         <div>
                             <label for="hero_title" class="block text-lg font-medium text-gray-300 mb-3">Hero Title</label>
-                            <input type="text" name="hero_title" id="hero_title"
-                                value="{{ old('hero_title', $settings['hero_title'] ?? 'Senior {Full Stack} Web & App developer_') }}"
-                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4">
+                            <!-- Changed to Textarea for WYSIWYG -->
+                            <textarea name="hero_title" id="hero_title" rows="3"
+                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4 tinymce-editor">{{ old('hero_title', $settings['hero_title'] ?? 'Senior {Full Stack} Web & App developer_') }}</textarea>
                             @error('hero_title')
                                 <span class="text-red-500 text-base mt-2">{{ $message }}</span>
                             @enderror
@@ -85,9 +85,8 @@
                         <div>
                             <label for="hero_subtitle" class="block text-lg font-medium text-gray-300 mb-3">Hero Subtitle /
                                 Suffix</label>
-                            <input type="text" name="hero_subtitle" id="hero_subtitle"
-                                value="{{ old('hero_subtitle', $settings['hero_subtitle'] ?? 'Hey, I\'m 28-Folio') }}"
-                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4">
+                            <textarea name="hero_subtitle" id="hero_subtitle" rows="3"
+                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4 tinymce-editor">{{ old('hero_subtitle', $settings['hero_subtitle'] ?? 'Hey, I\'m 28-Folio') }}</textarea>
                             @error('hero_subtitle')
                                 <span class="text-red-500 text-base mt-2">{{ $message }}</span>
                             @enderror
@@ -98,7 +97,7 @@
                             <label for="hero_description" class="block text-lg font-medium text-gray-300 mb-3">Hero
                                 Description</label>
                             <textarea name="hero_description" id="hero_description" rows="3"
-                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4">{{ old('hero_description', $settings['hero_description'] ?? 'With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust.') }}</textarea>
+                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4 tinymce-editor">{{ old('hero_description', $settings['hero_description'] ?? 'With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust.') }}</textarea>
                             @error('hero_description')
                                 <span class="text-red-500 text-base mt-2">{{ $message }}</span>
                             @enderror
@@ -150,3 +149,24 @@
     </div>
     </div>
 @endsection
+
+@push('scripts')
+    <!-- TinyMCE (Community Edition via cdnjs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '.tinymce-editor',
+            height: 300,
+            menubar: false,
+            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
+            toolbar: 'undo redo | blocks | bold italic forecolor backcolor | fontfamily fontsize | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+            forced_root_block: false, // Prevent wrapping in <p> tags
+            content_style: 'body { font-family:Inter,sans-serif; font-size:16px; color: #333; }',
+            setup: function(editor) {
+                editor.on('change', function() {
+                    editor.save();
+                });
+            }
+        });
+    </script>
+@endpush
