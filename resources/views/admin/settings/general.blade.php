@@ -81,6 +81,59 @@
                             @enderror
                         </div>
 
+                        <!-- Hero Highlight Text -->
+                        <div>
+                            <label for="hero_highlight_text"
+                                class="block text-lg font-medium text-gray-300 mb-3">Highlighted Word/Phrase</label>
+                            <input type="text" name="hero_highlight_text" id="hero_highlight_text"
+                                placeholder="e.g. {Full Stack}"
+                                value="{{ old('hero_highlight_text', $settings['hero_highlight_text'] ?? '{Full Stack}') }}"
+                                class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-4">
+                            @error('hero_highlight_text')
+                                <span class="text-red-500 text-base mt-2">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Highlight & Cursor Colors Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Hero Highlight Color -->
+                            <div>
+                                <label for="hero_highlight_color"
+                                    class="block text-lg font-medium text-gray-300 mb-3">Highlight Color</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="color" name="hero_highlight_color" id="hero_highlight_color"
+                                        value="{{ old('hero_highlight_color', $settings['hero_highlight_color'] ?? '#22c55e') }}"
+                                        class="h-12 w-12 rounded border-0 cursor-pointer">
+                                    <input type="text" name="hero_highlight_color_text" id="hero_highlight_color_text"
+                                        value="{{ old('hero_highlight_color', $settings['hero_highlight_color'] ?? '#22c55e') }}"
+                                        onchange="document.getElementById('hero_highlight_color').value = this.value"
+                                        class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-2">
+                                </div>
+                                @error('hero_highlight_color')
+                                    <span class="text-red-500 text-base mt-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Hero Cursor Color -->
+                            <div>
+                                <label for="hero_title_cursor_color"
+                                    class="block text-lg font-medium text-gray-300 mb-3">Cursor Color</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="color" name="hero_title_cursor_color" id="hero_title_cursor_color"
+                                        value="{{ old('hero_title_cursor_color', $settings['hero_title_cursor_color'] ?? '#ec4899') }}"
+                                        class="h-12 w-12 rounded border-0 cursor-pointer">
+                                    <input type="text" name="hero_title_cursor_color_text"
+                                        id="hero_title_cursor_color_text"
+                                        value="{{ old('hero_title_cursor_color', $settings['hero_title_cursor_color'] ?? '#ec4899') }}"
+                                        onchange="document.getElementById('hero_title_cursor_color').value = this.value"
+                                        class="block w-full rounded-md border-gray-700 bg-gray-900 text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg px-5 py-2">
+                                </div>
+                                @error('hero_title_cursor_color')
+                                    <span class="text-red-500 text-base mt-2">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <!-- Hero Subtitle -->
                         <div>
                             <label for="hero_subtitle" class="block text-lg font-medium text-gray-300 mb-3">Hero Subtitle /

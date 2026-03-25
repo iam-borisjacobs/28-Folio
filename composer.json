@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "filament/filament": "3.2.49",
         "intervention/image": "^3.11",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9"
@@ -39,7 +40,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -61,6 +63,8 @@
             "dont-discover": []
         }
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
@@ -68,8 +72,13 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false,
+            "ignore": {
+                "PKSA-1ds2-yqqr-64g1": "*",
+                "PKSA-jyd3-2srm-pfqd": "*"
+            }
         }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+    }
 }

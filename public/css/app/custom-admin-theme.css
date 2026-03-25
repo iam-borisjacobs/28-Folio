@@ -1,0 +1,84 @@
+/* Custom overrides to match the original dark admin dashboard */
+
+/* Base background */
+body {
+    background-color: #0d1117 !important; /* Very dark blue-gray */
+}
+
+/* Sidebar background */
+.fi-sidebar {
+    background-color: #111827 !important; /* Slightly lighter gray-900 */
+    border-right: 1px solid #1f2937 !important; /* gray-800 */
+}
+
+/* Sidebar items */
+.fi-sidebar-item-active > a {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+}
+
+.fi-sidebar-group-label {
+    color: #9ca3af !important; /* Gray 400 */
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+}
+
+/* Topbar */
+.fi-topbar {
+    background-color: #111827 !important;
+    border-bottom: 1px solid #1f2937 !important;
+}
+
+/* Main Content Area Cards */
+.fi-main {
+    background-color: #0d1117 !important;
+}
+
+.fi-ta-header,
+.fi-wi-stats-overview-stat,
+.fi-fo-wizard-header,
+.fi-section-header,
+.fi-section-content {
+    background-color: #1f2937 !important; /* gray-800 */
+    border-color: #374151 !important; /* border-gray-700 */
+}
+
+/* Adjust radius to match the slightly softer corners of original */
+.rounded-xl {
+    border-radius: 0.5rem !important; /* Standard md rounded */
+}
+
+/* Typography tweaks */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600 !important;
+    color: #f3f4f6 !important; /* gray-100 */
+}
+
+/* Aggressively force scaling across the entire UI structure */
+.fi-body,
+.fi-layout,
+.fi-main,
+.fi-sidebar {
+    zoom: 1.54 !important; /* Forces a 154% scale on compatible browsers */
+    transform: scale(1.54) !important;
+    transform-origin: top left !important;
+    -moz-transform: scale(1.54) !important;
+    -moz-transform-origin: top left !important;
+}
+
+/* Sidebar Specific Scaling Overrides */
+.fi-sidebar {
+    width: 25rem !important; /* Needs to be larger when zoomed to prevent cramping */
+}
+
+/* Increase Logo Size beyond the zoom factor */
+.fi-logo {
+    transform: scale(2) !important;
+    transform-origin: left center !important;
+    margin-left: 1rem !important;
+}

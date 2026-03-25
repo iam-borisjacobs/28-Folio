@@ -2,7 +2,7 @@
     <div class="header-inner">
         <!-- Left Section: Brand -->
         <div class="header-left">
-            <a href="{{ route('home') }}" class="brand">
+            <a href="{{ url('/') }}" class="brand">
                 <span class="brand-bracket">&lt;/&gt;</span>
                 {{ setting('site_name', 'James.dev') }}
             </a>
@@ -11,8 +11,7 @@
         <!-- Center Section: Navigation (Desktop) -->
         <nav class="header-center">
             <ul class="nav-menu">
-                <li><a href="{{ route('home') }}"
-                        class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                <li><a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="{{ route('projects.index') }}"
                         class="nav-link {{ request()->routeIs('projects.*') ? 'active' : '' }}">Portfolio</a></li>
@@ -69,7 +68,7 @@
         x-transition:leave-end="transform translate-x-full" style="display: none;">
 
         <div class="drawer-header">
-            <a href="{{ route('home') }}" class="brand">
+            <a href="{{ url('/') }}" class="brand">
                 <span class="brand-bracket">&lt;/&gt;</span>
                 {{ setting('site_name', 'James.dev') }}
             </a>
@@ -83,7 +82,7 @@
         </div>
 
         <nav class="drawer-nav">
-            <a href="{{ route('home') }}" class="drawer-link">Home <span class="arrow">&gt;</span></a>
+            <a href="{{ url('/') }}" class="drawer-link">Home <span class="arrow">&gt;</span></a>
             <a href="#services" class="drawer-link">Services <span class="arrow">&gt;</span></a>
             <a href="{{ route('projects.index') }}" class="drawer-link">Portfolio <span
                     class="arrow">&gt;</span></a>

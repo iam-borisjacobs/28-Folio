@@ -35,6 +35,9 @@ class GeneralSettingsController extends Controller
             'site_description' => 'nullable|string|max:500',
             'primary_email' => 'required|email|max:255',
             'hero_title' => 'nullable|string|max:255',
+            'hero_highlight_text' => 'nullable|string|max:255',
+            'hero_highlight_color' => 'nullable|string|max:50',
+            'hero_title_cursor_color' => 'nullable|string|max:50',
             'hero_subtitle' => 'nullable|string|max:255',
             'hero_description' => 'nullable|string|max:1000',
             'hero_image' => 'nullable|image|max:2048', // 2MB Max

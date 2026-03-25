@@ -14,7 +14,6 @@ use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\ProjectController;
 use App\Http\Controllers\Public\RobotsController;
 use App\Http\Controllers\Public\SitemapController;
-use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,17 +27,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home Route
-Route::get('/', function () {
-    $projects = Project::where('status', 'published')
-        ->with(['translations', 'categories', 'tags'])
-        ->orderBy('is_featured', 'desc')
-        ->latest('published_at')
-        ->take(6)
-        ->get();
-
-    return theme_view('welcome', compact('projects'));
-})->name('home');
+// The home route is now handled dynamically by the fallback `/{slug?}` route at the bottom of this file.
 
 // Dashboard Redirect
 Route::get('/dashboard', function () {
@@ -52,85 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Admin Routes
-Route::middleware(['auth', 'verified', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', App\Http\Controllers\Admin\AdminDashboardController::class)->name('dashboard');
-
-    // Projects
-    Route::resource('projects/categories', \App\Http\Controllers\Admin\ProjectCategoryController::class, ['as' => 'projects']);
-    Route::resource('projects/tags', \App\Http\Controllers\Admin\ProjectTagController::class, ['as' => 'projects']);
-    Route::resource('projects', \App\Http\Controllers\Admin\ProjectController::class);
-
-    // Content
-    Route::get('/pages', [App\Http\Controllers\Admin\AdminController::class, 'pages'])->name('pages.index');
-
-    // Blog (Posts, Categories, Tags)
-    Route::prefix('posts')->name('posts.')->group(function () {
-        Route::resource('categories', \App\Http\Controllers\Admin\PostCategoryController::class);
-        Route::resource('tags', \App\Http\Controllers\Admin\PostTagController::class);
-    });
-    Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
-
-    // Resume Builder
-    Route::prefix('resume')->name('resume.')->group(function () {
-        Route::get('/', function () {
-            return redirect()->route('admin.resume.experience.index');
-        })->name('index');
-
-        Route::resource('experience', \App\Http\Controllers\Admin\Resume\ExperienceController::class);
-        Route::resource('education', \App\Http\Controllers\Admin\Resume\EducationController::class);
-        Route::resource('skills', \App\Http\Controllers\Admin\Resume\SkillController::class);
-        Route::resource('certifications', \App\Http\Controllers\Admin\Resume\CertificationController::class);
-        Route::resource('awards', \App\Http\Controllers\Admin\Resume\AwardController::class);
-    });
-    // Media Manager
-    Route::prefix('media')->name('media.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\MediaController::class, 'index'])->name('index');
-        Route::post('/upload', [App\Http\Controllers\Admin\MediaController::class, 'upload'])->name('upload');
-        Route::post('/folders', [App\Http\Controllers\Admin\MediaController::class, 'storeFolder'])->name('folders.store');
-        Route::delete('/{media}', [App\Http\Controllers\Admin\MediaController::class, 'destroy'])->name('destroy');
-        Route::delete('/folders/{folder}', [App\Http\Controllers\Admin\MediaController::class, 'destroyFolder'])->name('folders.destroy');
-    });
-
-    // Leads
-    Route::resource('leads', \App\Http\Controllers\Admin\LeadController::class)->only(['index', 'show', 'update', 'destroy']);
-
-    // Analytics
-    Route::get('/analytics', [App\Http\Controllers\Admin\AdminController::class, 'analytics'])->name('analytics.index');
-
-    // Appearance / Themes
-    Route::get('themes', [\App\Http\Controllers\Admin\ThemeController::class, 'index'])->name('themes.index');
-    Route::post('themes', [\App\Http\Controllers\Admin\ThemeController::class, 'store'])->name('themes.store');
-    Route::post('themes/activate', [\App\Http\Controllers\Admin\ThemeController::class, 'activate'])->name('themes.activate');
-    Route::delete('themes/{slug}', [\App\Http\Controllers\Admin\ThemeController::class, 'destroy'])->name('themes.destroy');
-    Route::get('/addons', [App\Http\Controllers\Admin\AdminController::class, 'addons'])->name('addons.index');
-
-    // Settings
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\AdminController::class, 'settings'])->name('index');
-
-        Route::resource('languages', \App\Http\Controllers\Admin\Settings\LanguageSettingsController::class);
-
-        // General Settings
-        Route::get('/general', [\App\Http\Controllers\Admin\Settings\GeneralSettingsController::class, 'edit'])->name('general');
-
-        // Branding Settings
-        Route::get('/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'edit'])->name('branding');
-        // Route::post('/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'update']);
-
-        // SEO Settings
-        Route::get('/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'edit'])->name('seo');
-        // Route::post('/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'update']);
-
-        Route::get('/scripts', [\App\Http\Controllers\Admin\Settings\ScriptSettingsController::class, 'edit'])->name('scripts');
-        Route::post('/scripts', [\App\Http\Controllers\Admin\Settings\ScriptSettingsController::class, 'update']);
-
-        Route::get('/contact', [\App\Http\Controllers\Admin\ContactSettingController::class, 'edit'])->name('contact.edit');
-        Route::put('/contact', [\App\Http\Controllers\Admin\ContactSettingController::class, 'update'])->name('contact.update');
-    });
-    Route::get('/license', [App\Http\Controllers\Admin\AdminController::class, 'license'])->name('license.index');
-    Route::get('/backups', [App\Http\Controllers\Admin\AdminController::class, 'backups'])->name('backups.index');
-});
+// Admin Routes (Now handled directly by Filament Resources)
 
 // Install Routes
 Route::prefix('install')->name('install.')->group(function () {
@@ -161,9 +72,7 @@ Route::get('/lang/{locale}', [\App\Http\Controllers\Public\LanguageController::c
 // Auth Routes
 require __DIR__.'/auth.php';
 
-// General Settings Update (Manually secured in controller to bypass middleware issues)
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/admin/settings/general', [\App\Http\Controllers\Admin\Settings\GeneralSettingsController::class, 'update'])->name('admin.settings.general.update');
-    Route::post('/admin/settings/seo', [\App\Http\Controllers\Admin\Settings\SeoSettingsController::class, 'update'])->name('admin.settings.seo.update');
-    Route::post('/admin/settings/branding', [\App\Http\Controllers\Admin\Settings\BrandingSettingsController::class, 'update'])->name('admin.settings.branding.update');
-});
+// Dynamic Page Builder Route (Must be last)
+Route::get('/{slug?}', [\App\Http\Controllers\PageController::class, 'show'])
+    ->where('slug', '.*')
+    ->name('page.show');

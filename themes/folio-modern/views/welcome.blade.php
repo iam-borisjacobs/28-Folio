@@ -6,15 +6,44 @@
         <!-- Removed .container to allow hero-grid to match header width -->
         <div class="hero-grid">
             <div class="hero-content">
-                <div class="hero-pre-title font-mono text-pink flex items-center justify-start gap-2">
-                    <span class="code-tag">&lt;span&gt;</span>{!! setting('hero_subtitle', "Hey, I'm James") !!}<span
-                        class="code-tag">&lt;/span&gt;</span>
+                @php $subColor = setting('hero_subtitle_color', '#ec4899'); @endphp
+                <div class="hero-pre-title font-mono flex items-center justify-start gap-2">
+                    <span class="code-tag" style="color: {{ $subColor }};">&lt;span&gt;</span>{!! setting('hero_subtitle', "Hey, I'm James") !!}<span
+                        class="code-tag" style="color: {{ $subColor }};">&lt;/span&gt;</span>
                 </div>
-                <h1 class="h1">
-                    {!! setting('hero_title') !!}<span class="cursor" style="animation-duration: 2.5s !important;">_</span>
+                <h1 class="h1 font-mono">
+                    @php
+                        $title = setting('hero_title', 'Senior {Full Stack} Web & App Developer_');
+                        $cleanTitle = html_entity_decode(strip_tags($title), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+                        // Extract cursor if it ends with _
+                        $cursorChar = '_';
+                        if (str_ends_with(trim($cleanTitle), '_')) {
+                            $cleanTitle = substr(trim($cleanTitle), 0, -1);
+                        }
+
+                        $highlight = setting('hero_highlight_text', '{Full Stack}');
+                        if (!empty($highlight) && str_contains($cleanTitle, $highlight)) {
+                            $highlightColor = setting('hero_highlight_color', 'var(--accent-green)');
+                            $cleanTitle = str_replace(
+                                $highlight,
+                                '<span class="hero-highlight" style="color: ' .
+                                    $highlightColor .
+                                    ' !important; -webkit-text-fill-color: ' .
+                                    $highlightColor .
+                                    ' !important;">' .
+                                    $highlight .
+                                    '</span>',
+                                $cleanTitle,
+                            );
+                        }
+                        $cursorColor = setting('hero_title_cursor_color', 'var(--accent-primary)');
+                    @endphp
+                    {!! $cleanTitle !!}<span class="cursor"
+                        style="animation-duration: 2.5s !important; color: {{ $cursorColor }};">{{ $cursorChar }}</span>
                 </h1>
                 <p class="hero-description">
-                    <span class="code-tag">&lt;p&gt;</span>{!! strip_tags(setting('hero_description'), '<span><strong><em><b><i>') !!}<span class="cursor"
+                    <span class="code-tag">&lt;p&gt;</span>{!! setting('hero_description', 'Your bio goes here...') !!}<span class="cursor"
                         style="animation-duration: 2.7s !important;">|</span><span class="code-tag">&lt;/p&gt;</span>
 
                 </p>
@@ -40,14 +69,32 @@
                     </div>
                 </div>
 
+                @php
+                    $btnText = setting('hero_button_text', 'Download CV');
+                    $btnLink = setting('hero_button_link', '#');
+                    $btnTextColor = setting('hero_button_text_color');
+                    $btnBgColor = setting('hero_button_bg_color');
+                    $btnStyle = '';
+                    if (!empty($btnTextColor)) {
+                        $btnStyle .= 'color: ' . $btnTextColor . ' !important; ';
+                    }
+                    if (!empty($btnBgColor)) {
+                        $btnStyle .=
+                            'background-color: ' .
+                            $btnBgColor .
+                            ' !important; border-color: ' .
+                            $btnBgColor .
+                            ' !important;';
+                    }
+                @endphp
                 <div class="hero-actions">
-                    <a href="{{ theme_asset('cv.pdf') }}" class="btn btn-cv font-mono">
+                    <a href="{{ $btnLink }}" class="btn btn-cv font-mono" style="{{ $btnStyle }}">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             style="margin-right: 0.5rem;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                         </svg>
-                        Download My CV
+                        {{ $btnText }}
                     </a>
                 </div>
             </div>

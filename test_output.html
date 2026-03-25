@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>28-Foliovv</title>
+    <meta name="description" content="A modern portfolio system for creative professionals.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://28-folio.test/themes/folio-modern/css/variables.css?v=1772063048">
+    <link rel="stylesheet" href="https://28-folio.test/themes/folio-modern/css/style.css?v=1772063048">
+
+    <!-- Custom Head Scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+</head>
+
+<body>
+
+    <header class="site-header" x-data="{ mobileMenuOpen: false }">
+    <div class="header-inner">
+        <!-- Left Section: Brand -->
+        <div class="header-left">
+            <a href="https://28-folio.test" class="brand">
+                <span class="brand-bracket">&lt;/&gt;</span>
+                28-Foliovv
+            </a>
+        </div>
+
+        <!-- Center Section: Navigation (Desktop) -->
+        <nav class="header-center">
+            <ul class="nav-menu">
+                <li><a href="https://28-folio.test" class="nav-link active">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="https://28-folio.test/projects"
+                        class="nav-link ">Portfolio</a></li>
+                <li><a href="#resume" class="nav-link">Pricing</a></li>
+                <li><a href="https://28-folio.test/blog"
+                        class="nav-link ">Blog</a></li>
+                <li><a href="https://28-folio.test/contact"
+                        class="nav-link ">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Right Section: Controls -->
+        <div class="header-right">
+            <!-- Mobile Menu Toggle (Square Button) -->
+            <button class="menu-toggle" @click="mobileMenuOpen = true" aria-label="Open Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <svg class="sun-icon" width="20" height="20" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+            </button>
+
+            <!-- Desktop Language & Socials (Hidden on Mobile via CSS) -->
+            <div class="desktop-controls">
+                <div class="lang-switch" x-data="{ open: false }" @click.away="open = false">
+                    <button @click="open = !open" class="lang-btn">
+                        <span>🇺🇸 English</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"
+                            :class="{ 'rotate-180': open }">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <!-- Dropdown Content Omitted for Brevity - preserved in desktop-controls -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="transform translate-x-full" x-transition:enter-end="transform translate-x-0"
+        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="transform translate-x-0"
+        x-transition:leave-end="transform translate-x-full" style="display: none;">
+
+        <div class="drawer-header">
+            <a href="https://28-folio.test" class="brand">
+                <span class="brand-bracket">&lt;/&gt;</span>
+                28-Foliovv
+            </a>
+            <button class="close-btn" @click="mobileMenuOpen = false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="drawer-nav">
+            <a href="https://28-folio.test" class="drawer-link">Home <span class="arrow">&gt;</span></a>
+            <a href="#services" class="drawer-link">Services <span class="arrow">&gt;</span></a>
+            <a href="https://28-folio.test/projects" class="drawer-link">Portfolio <span
+                    class="arrow">&gt;</span></a>
+            <a href="#resume" class="drawer-link">Pricing <span class="arrow">&gt;</span></a>
+            <a href="https://28-folio.test/blog" class="drawer-link">Blog <span class="arrow">&gt;</span></a>
+            <a href="https://28-folio.test/contact" class="drawer-link">Contact <span class="arrow">&gt;</span></a>
+        </nav>
+
+        <div class="drawer-footer">
+            <!-- Mobile Language Switch -->
+            <div class="drawer-lang">
+                <button class="lang-btn-mobile">
+                    🇺🇸 English <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Socials -->
+            <div class="social-links mobile-socials">
+                <a href="#" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg></a>
+                <a href="#" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg></a>
+                <a href="#" class="social-link"><svg width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main>
+        
+                        
+            
+                            <section class="hero-section">
+    <div class="hero-grid">
+        <div class="hero-content">
+            <div class="hero-pre-title font-mono text-pink flex items-center justify-start gap-2"
+                style="color: #fffefe;">
+                <span class="code-tag">&lt;span&gt;</span>Hey, I&#039;m king<span
+                    class="code-tag">&lt;/span&gt;</span>
+            </div>
+                                    <h1 class="h1 font-mono">
+                Senior <span class="hero-highlight" style="color: #00bd13 !important; -webkit-text-fill-color: #00bd13 !important;">{Full Stack}</span> Web & App Developer<span class="cursor"
+                    style="animation-duration: 2.5s !important; color: #00bd13;">_</span>
+            </h1>
+            <p class="hero-description">
+                <span class="code-tag">&lt;p&gt;</span>With expertise in NodeJS, React, Angular, and Laravel, I deliver web solutions that are both innovative and robust<span class="cursor"
+                    style="animation-duration: 2.7s !important;">|</span><span class="code-tag">&lt;/p&gt;</span>
+
+            </p>
+
+                            <div class="hero-icons mb-8" style="margin-bottom: 2.5rem;">
+                    <div class="icon-track">
+                        <!-- First Row -->
+                        <div class="icon-row">
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43QM9RA4H2PJHJ5MEDFX.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RNJEXVNE2HRANM79DA.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RTPHR4DRK2AV3ZDPB7.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RZZNE56PQDBXZFFCY3.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43S3RGMFK917HABGFKB4.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43S8S1C9X910DXD011G6.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43SDBGKRX4NK640B967E.png" alt="Tech Icon"></div>
+                                                    </div>
+                        <!-- Second Row (Duplicate for Loop) -->
+                        <div class="icon-row">
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43QM9RA4H2PJHJ5MEDFX.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RNJEXVNE2HRANM79DA.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RTPHR4DRK2AV3ZDPB7.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43RZZNE56PQDBXZFFCY3.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43S3RGMFK917HABGFKB4.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43S8S1C9X910DXD011G6.png" alt="Tech Icon"></div>
+                                                                                            <div class="tech-icon-img"><img src="/storage/tech-icons/01KJ8V43SDBGKRX4NK640B967E.png" alt="Tech Icon"></div>
+                                                    </div>
+                    </div>
+                </div>
+            
+                        <div class="hero-actions">
+                <a href="#" class="btn btn-cv font-mono"
+                    style="color: #00bd13 !important; background-color: #ffffff !important; border-color: #ffffff !important;">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        style="margin-right: 0.5rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download My CV
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <div class="profile-hex">
+                                    <img src="/storage/hero-images/01KJ0WEH040N580CGGGH13VD89.JPG" alt="Profile">
+                
+                <!-- Floating Badge -->
+                <div
+                    style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); background: #a855f7; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #fff; box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);">
+                    &lt;/&gt;
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                                
+            
+                            <section class="stats-section">
+    <div class="stats-grid">
+                                    <div class="stat-item">
+                    <div class="stat-icon">
+                                                    <!-- Fallback icon -->
+                            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                            </svg>
+                                            </div>
+                    <div class="stat-number">456<span
+                            class="stat-plus">+</span></div>
+                    <div class="stat-label"> <span
+                            class="stat-highlight"></span></div>
+                </div>
+
+                                    <div class="stat-divider"></div>
+                                            <div class="stat-item">
+                    <div class="stat-icon">
+                                                    <!-- Fallback icon -->
+                            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                            </svg>
+                                            </div>
+                    <div class="stat-number">565<span
+                            class="stat-plus">+</span></div>
+                    <div class="stat-label"> <span
+                            class="stat-highlight"></span></div>
+                </div>
+
+                                    <div class="stat-divider"></div>
+                                            <div class="stat-item">
+                    <div class="stat-icon">
+                                                    <!-- Fallback icon -->
+                            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                            </svg>
+                                            </div>
+                    <div class="stat-number">500<span
+                            class="stat-plus">+</span></div>
+                    <div class="stat-label"> <span
+                            class="stat-highlight"></span></div>
+                </div>
+
+                                    <div class="stat-divider"></div>
+                                            <div class="stat-item">
+                    <div class="stat-icon">
+                                                    <!-- Fallback icon -->
+                            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                            </svg>
+                                            </div>
+                    <div class="stat-number">5656<span
+                            class="stat-plus">+</span></div>
+                    <div class="stat-label"> <span
+                            class="stat-highlight"></span></div>
+                </div>
+
+                                        </div>
+</section>
+                                
+            
+                            <section class="section" id="services">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">What I do</h2>
+            <p class="section-subtitle">
+                I help ambitious companies and people build digital products.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8"
+            style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                                                <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3>website maintain</h3>
+                        <p class="text-muted">With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust</p>
+                    </div>
+                                    <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3>website maintain</h3>
+                        <p class="text-muted">With expertise in cutting-edge technologies such as NodeJS, React, Angular, and Laravel... I deliver web solutions that are both innovative and robust</p>
+                    </div>
+                                    <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3>website maintain</h3>
+                        <p class="text-muted">With expertise in NodeJS, React, Angular, and Laravel, I deliver web solutions that are both innovative and robust</p>
+                    </div>
+                            
+        </div>
+    </div>
+</section>
+                                
+            
+                            <section class="section" id="portfolio">
+    <div class="container">
+        <div class="flex justify-between items-center section-header">
+            <div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">check out some of my latest work.</p>
+            </div>
+                            <a href="/projects"
+                    class="btn btn-primary">View All &rarr;</a>
+                    </div>
+
+        <div class="grid grid-cols-2 gap-8" style="gap: 2rem;">
+                            <div class="text-muted">No projects found. Add some in the admin panel!</div>
+                    </div>
+    </div>
+</section>
+                        
+    </main>
+
+    <footer class="site-footer">
+    <div class="container">
+        <div class="flex flex-col items-center justify-center text-center">
+
+            <!-- Brand -->
+            <div class="brand mb-4" style="margin-bottom: 1.5rem;">
+                <span class="brand-bracket">&lt;/&gt;</span>
+                28-Foliovv
+            </div>
+
+            <!-- Nav -->
+            <nav class="mb-6" style="margin-bottom: 2rem;">
+                <ul class="flex gap-4 justify-center" style="gap: 2rem; flex-wrap: wrap;">
+                    <li><a href="https://28-folio.test" class="text-muted hover:text-white">Home</a></li>
+                    <li><a href="https://28-folio.test/projects" class="text-muted hover:text-white">Portfolio</a></li>
+                    <li><a href="https://28-folio.test/blog" class="text-muted hover:text-white">Blog</a></li>
+                    <li><a href="https://28-folio.test/contact" class="text-muted hover:text-white">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Copyright -->
+            <p class="text-muted text-sm">
+                &copy; 2026 28-Foliovv. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- Custom Body Scripts -->
+    
+</body>
+
+</html>
+
