@@ -15,6 +15,7 @@
         rel="stylesheet">
 
     <!-- Styles -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ theme_asset('css/variables.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ theme_asset('css/style.css') }}?v={{ time() }}">
 

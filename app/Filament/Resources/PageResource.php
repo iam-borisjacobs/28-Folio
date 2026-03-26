@@ -42,6 +42,8 @@ class PageResource extends Resource
                             \App\Filament\Blocks\ServicesBlock::make(),
                             \App\Filament\Blocks\PortfolioBlock::make(),
                             \App\Filament\Blocks\ResumeBlock::make(),
+                            \App\Filament\Blocks\SkillsBlock::make(),
+                            \App\Filament\Blocks\BlogFeedBlock::make(),
                             \App\Filament\Blocks\TestimonialsBlock::make(),
                             \App\Filament\Blocks\CtaBlock::make(),
                         ])

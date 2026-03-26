@@ -38,8 +38,14 @@ class PostResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('featured_image')
                     ->image(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'published' => 'Published',
+                        'scheduled' => 'Scheduled',
+                    ])
+                    ->required()
+                    ->default('draft'),
                 Forms\Components\DateTimePicker::make('published_at'),
                 Forms\Components\TextInput::make('reading_time')
                     ->numeric(),

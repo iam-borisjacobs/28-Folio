@@ -5,7 +5,11 @@
                 <div class="stat-item">
                     <div class="stat-icon">
                         @if (isset($stat['icon_svg']) && !empty($stat['icon_svg']))
-                            {!! $stat['icon_svg'] !!}
+                            @if(str_starts_with(trim($stat['icon_svg']), '<svg'))
+                                {!! $stat['icon_svg'] !!}
+                            @else
+                                <img src="{{ Storage::url($stat['icon_svg']) }}" alt="Stat Icon" style="width: 22px; height: 22px; object-fit: contain; filter: invert(1); opacity: 0.8;" />
+                            @endif
                         @else
                             <!-- Fallback icon -->
                             <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"

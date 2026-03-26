@@ -29,9 +29,12 @@ class StatsBlock
                         TextInput::make('label_highlight')
                             ->label('Highlighted Label (e.g. Experience)')
                             ->placeholder('Experience'),
-                        TextInput::make('icon_svg')
-                            ->label('SVG Code for Icon')
-                            ->helperText('Paste inline SVG here for the icon')
+                        \Filament\Forms\Components\FileUpload::make('icon_svg')
+                            ->label('Upload Icon (SVG/PNG)')
+                            ->image()
+                            ->directory('stats-icons')
+                            ->acceptedFileTypes(['image/svg+xml', 'image/png', 'image/jpeg'])
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                     ])
                     ->columns(2)

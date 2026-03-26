@@ -38,12 +38,29 @@ class ProjectResource extends Resource
                 Forms\Components\FileUpload::make('featured_image')
                     ->image(),
                 Forms\Components\TextInput::make('project_url')
+                    ->label('Live Demo URL')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('github_url')
+                    ->label('Source/Github URL')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('role')
+                    ->label('Your Position / Role')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('client')
+                    ->label('Client Name')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('duration')
+                    ->label('Project Duration')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_featured')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'draft' => 'Draft',
+                        'published' => 'Published',
+                        'active' => 'Active',
+                    ])
                     ->required()
-                    ->maxLength(255)
                     ->default('draft'),
                 Forms\Components\DateTimePicker::make('published_at'),
                 Forms\Components\TextInput::make('seo_meta'),

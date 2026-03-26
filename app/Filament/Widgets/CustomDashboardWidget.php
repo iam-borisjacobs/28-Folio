@@ -34,7 +34,7 @@ class CustomDashboardWidget extends Widget
             'posts' => Post::count(),
             'leads' => $this->totalLeads,
         ];
-        $recent_projects_data = Project::latest()->take(3)->get();
+        $recent_projects_data = Project::with(['categories', 'tags'])->latest()->take(3)->get();
         $this->recent_projects = [];
         foreach($recent_projects_data as $proj) {
             $this->recent_projects[] = [

@@ -16,18 +16,28 @@ class CtaBlock
             ->schema([
                 TextInput::make('title')
                     ->label('Main Title')
-                    ->default('Have a project in mind?')
+                    ->default('Let\'s connect')
                     ->required(),
-                Textarea::make('subtitle')
-                    ->label('Subtitle / Description')
-                    ->default('I am available for freelance work. Connect with me via email or phone.')
-                    ->rows(2),
-                TextInput::make('button_text')
-                    ->label('Button Text')
-                    ->default('Contact Me'),
-                TextInput::make('button_link')
-                    ->label('Button Link (e.g. /contact)')
-                    ->default('/contact'),
+                
+                \Filament\Forms\Components\Repeater::make('contact_info')
+                    ->label('Contact Information Details (Right Side)')
+                    ->schema([
+                        \Filament\Forms\Components\FileUpload::make('icon_svg')
+                            ->label('Upload Icon (SVG/PNG)')
+                            ->image()
+                            ->directory('cta-icons')
+                            ->acceptedFileTypes(['image/svg+xml', 'image/png', 'image/jpeg'])
+                            ->maxSize(2048)
+                            ->nullable(),
+                        TextInput::make('title')
+                            ->label('Detail Title (e.g. Phone)')
+                            ->required(),
+                        TextInput::make('value')
+                            ->label('Value (e.g. +1-123-456)')
+                            ->required(),
+                    ])
+                    ->collapsible()
+                    ->defaultItems(3),
             ]);
     }
 }
